@@ -1,7 +1,7 @@
 {
   "format": "layers-model",
   "generatedBy": "keras v2.2.4-tf",
-  "convertedBy": "TensorFlow.js Converter v1.3.2",
+  "convertedBy": "TensorFlow.js Converter v1.4.0",
   "modelTopology": {
     "keras_version": "2.2.4-tf",
     "backend": "tensorflow",
@@ -11,7 +11,6 @@
         "name": "model",
         "layers": [
           {
-            "name": "vgg_input",
             "class_name": "InputLayer",
             "config": {
               "batch_input_shape": [null, null, null, 3],
@@ -19,17 +18,17 @@
               "sparse": false,
               "name": "vgg_input"
             },
+            "name": "vgg_input",
             "inbound_nodes": []
           },
           {
-            "name": "preprocess",
-            "class_name": "Lambda",
+            "class_name": "Preprocess",
             "config": {
               "name": "preprocess",
               "trainable": false,
               "dtype": "float32",
               "function": [
-                "4wEAAAAAAAAAAQAAAAQAAABTAAAAcxgAAAB0AGoBfABkBGcBZAKNAmQDFAB0AhgAUwApBU7pAQAA\nACkB2gRheGlzZwAAAAAA4G9A6f////8pA9oCdGbaB3JldmVyc2XaCk1FQU5fUElYRUwpAdoBeKkA\ncggAAAD6HjxpcHl0aG9uLWlucHV0LTgtNzZiYmYxYTU0N2UwPtoIPGxhbWJkYT4KAAAAcwAAAAA=\n",
+                "4wEAAAAAAAAAAQAAAAQAAABTAAAAcxgAAAB0AGoBfABkBGcBZAKNAmQDFAB0AhgAUwApBU7pAQAA\nACkB2gRheGlzZwAAAAAA4G9A6f////8pA9oCdGbaB3JldmVyc2XaCk1FQU5fUElYRUwpAdoBeKkA\ncggAAAD6HjxpcHl0aG9uLWlucHV0LTctMDQ4N2UwNWZiMjQ3PtoIPGxhbWJkYT4KAAAAcwAAAAA=\n",
                 null,
                 null
               ],
@@ -40,10 +39,31 @@
               "output_shape_module": null,
               "arguments": {}
             },
+            "name": "preprocess",
             "inbound_nodes": [[["vgg_input", 0, 0, {}]]]
           },
           {
-            "name": "block1_conv1",
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda",
+              "trainable": false,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNC0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda",
+            "inbound_nodes": [[["preprocess", 0, 0, {}]]]
+          },
+          {
             "class_name": "Conv2D",
             "config": {
               "name": "block1_conv1",
@@ -68,10 +88,31 @@
               "kernel_constraint": null,
               "bias_constraint": null
             },
-            "inbound_nodes": [[["preprocess", 0, 0, {}]]]
+            "name": "block1_conv1",
+            "inbound_nodes": [[["lambda", 0, 0, {}]]]
           },
           {
-            "name": "block1_conv2",
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_1",
+              "trainable": false,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNC0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_1",
+            "inbound_nodes": [[["block1_conv1", 0, 0, {}]]]
+          },
+          {
             "class_name": "Conv2D",
             "config": {
               "name": "block1_conv2",
@@ -96,10 +137,10 @@
               "kernel_constraint": null,
               "bias_constraint": null
             },
-            "inbound_nodes": [[["block1_conv1", 0, 0, {}]]]
+            "name": "block1_conv2",
+            "inbound_nodes": [[["lambda_1", 0, 0, {}]]]
           },
           {
-            "name": "block1_pool",
             "class_name": "MaxPooling2D",
             "config": {
               "name": "block1_pool",
@@ -110,10 +151,31 @@
               "strides": [2, 2],
               "data_format": "channels_last"
             },
+            "name": "block1_pool",
             "inbound_nodes": [[["block1_conv2", 0, 0, {}]]]
           },
           {
-            "name": "block2_conv1",
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_2",
+              "trainable": false,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNC0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_2",
+            "inbound_nodes": [[["block1_pool", 0, 0, {}]]]
+          },
+          {
             "class_name": "Conv2D",
             "config": {
               "name": "block2_conv1",
@@ -138,10 +200,31 @@
               "kernel_constraint": null,
               "bias_constraint": null
             },
-            "inbound_nodes": [[["block1_pool", 0, 0, {}]]]
+            "name": "block2_conv1",
+            "inbound_nodes": [[["lambda_2", 0, 0, {}]]]
           },
           {
-            "name": "block2_conv2",
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_3",
+              "trainable": false,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNC0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_3",
+            "inbound_nodes": [[["block2_conv1", 0, 0, {}]]]
+          },
+          {
             "class_name": "Conv2D",
             "config": {
               "name": "block2_conv2",
@@ -166,10 +249,10 @@
               "kernel_constraint": null,
               "bias_constraint": null
             },
-            "inbound_nodes": [[["block2_conv1", 0, 0, {}]]]
+            "name": "block2_conv2",
+            "inbound_nodes": [[["lambda_3", 0, 0, {}]]]
           },
           {
-            "name": "block2_pool",
             "class_name": "MaxPooling2D",
             "config": {
               "name": "block2_pool",
@@ -180,10 +263,31 @@
               "strides": [2, 2],
               "data_format": "channels_last"
             },
+            "name": "block2_pool",
             "inbound_nodes": [[["block2_conv2", 0, 0, {}]]]
           },
           {
-            "name": "block3_conv1",
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_4",
+              "trainable": false,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNC0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_4",
+            "inbound_nodes": [[["block2_pool", 0, 0, {}]]]
+          },
+          {
             "class_name": "Conv2D",
             "config": {
               "name": "block3_conv1",
@@ -208,10 +312,31 @@
               "kernel_constraint": null,
               "bias_constraint": null
             },
-            "inbound_nodes": [[["block2_pool", 0, 0, {}]]]
+            "name": "block3_conv1",
+            "inbound_nodes": [[["lambda_4", 0, 0, {}]]]
           },
           {
-            "name": "block3_conv2",
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_5",
+              "trainable": false,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNC0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_5",
+            "inbound_nodes": [[["block3_conv1", 0, 0, {}]]]
+          },
+          {
             "class_name": "Conv2D",
             "config": {
               "name": "block3_conv2",
@@ -236,10 +361,31 @@
               "kernel_constraint": null,
               "bias_constraint": null
             },
-            "inbound_nodes": [[["block3_conv1", 0, 0, {}]]]
+            "name": "block3_conv2",
+            "inbound_nodes": [[["lambda_5", 0, 0, {}]]]
           },
           {
-            "name": "block3_conv3",
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_6",
+              "trainable": false,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNC0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_6",
+            "inbound_nodes": [[["block3_conv2", 0, 0, {}]]]
+          },
+          {
             "class_name": "Conv2D",
             "config": {
               "name": "block3_conv3",
@@ -264,10 +410,31 @@
               "kernel_constraint": null,
               "bias_constraint": null
             },
-            "inbound_nodes": [[["block3_conv2", 0, 0, {}]]]
+            "name": "block3_conv3",
+            "inbound_nodes": [[["lambda_6", 0, 0, {}]]]
           },
           {
-            "name": "block3_conv4",
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_7",
+              "trainable": false,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNC0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_7",
+            "inbound_nodes": [[["block3_conv3", 0, 0, {}]]]
+          },
+          {
             "class_name": "Conv2D",
             "config": {
               "name": "block3_conv4",
@@ -292,10 +459,10 @@
               "kernel_constraint": null,
               "bias_constraint": null
             },
-            "inbound_nodes": [[["block3_conv3", 0, 0, {}]]]
+            "name": "block3_conv4",
+            "inbound_nodes": [[["lambda_7", 0, 0, {}]]]
           },
           {
-            "name": "block3_pool",
             "class_name": "MaxPooling2D",
             "config": {
               "name": "block3_pool",
@@ -306,10 +473,31 @@
               "strides": [2, 2],
               "data_format": "channels_last"
             },
+            "name": "block3_pool",
             "inbound_nodes": [[["block3_conv4", 0, 0, {}]]]
           },
           {
-            "name": "block4_conv1",
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_8",
+              "trainable": false,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNC0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_8",
+            "inbound_nodes": [[["block3_pool", 0, 0, {}]]]
+          },
+          {
             "class_name": "Conv2D",
             "config": {
               "name": "block4_conv1",
@@ -334,7 +522,8 @@
               "kernel_constraint": null,
               "bias_constraint": null
             },
-            "inbound_nodes": [[["block3_pool", 0, 0, {}]]]
+            "name": "block4_conv1",
+            "inbound_nodes": [[["lambda_8", 0, 0, {}]]]
           }
         ],
         "input_layers": [["vgg_input", 0, 0]],

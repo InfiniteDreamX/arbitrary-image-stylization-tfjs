@@ -22,6 +22,27 @@
             "inbound_nodes": []
           },
           {
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_16",
+              "trainable": true,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNS0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_16",
+            "inbound_nodes": [[["Decoder_input", 0, 0, {}]]]
+          },
+          {
             "class_name": "Conv2D",
             "config": {
               "name": "conv4_1",
@@ -47,20 +68,41 @@
               "bias_constraint": null
             },
             "name": "conv4_1",
-            "inbound_nodes": [[["Decoder_input", 0, 0, {}]]]
+            "inbound_nodes": [[["lambda_16", 0, 0, {}]]]
           },
           {
             "class_name": "UpSampling2D",
             "config": {
-              "name": "up_sampling2d_9",
+              "name": "up_sampling2d_3",
               "trainable": true,
               "dtype": "float32",
               "size": [2, 2],
               "data_format": "channels_last",
               "interpolation": "nearest"
             },
-            "name": "up_sampling2d_9",
+            "name": "up_sampling2d_3",
             "inbound_nodes": [[["conv4_1", 0, 0, {}]]]
+          },
+          {
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_17",
+              "trainable": true,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNS0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_17",
+            "inbound_nodes": [[["up_sampling2d_3", 0, 0, {}]]]
           },
           {
             "class_name": "Conv2D",
@@ -88,7 +130,28 @@
               "bias_constraint": null
             },
             "name": "conv3_4",
-            "inbound_nodes": [[["up_sampling2d_9", 0, 0, {}]]]
+            "inbound_nodes": [[["lambda_17", 0, 0, {}]]]
+          },
+          {
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_18",
+              "trainable": true,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNS0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_18",
+            "inbound_nodes": [[["conv3_4", 0, 0, {}]]]
           },
           {
             "class_name": "Conv2D",
@@ -116,7 +179,28 @@
               "bias_constraint": null
             },
             "name": "conv3_3",
-            "inbound_nodes": [[["conv3_4", 0, 0, {}]]]
+            "inbound_nodes": [[["lambda_18", 0, 0, {}]]]
+          },
+          {
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_19",
+              "trainable": true,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNS0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_19",
+            "inbound_nodes": [[["conv3_3", 0, 0, {}]]]
           },
           {
             "class_name": "Conv2D",
@@ -144,7 +228,28 @@
               "bias_constraint": null
             },
             "name": "conv3_2",
-            "inbound_nodes": [[["conv3_3", 0, 0, {}]]]
+            "inbound_nodes": [[["lambda_19", 0, 0, {}]]]
+          },
+          {
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_20",
+              "trainable": true,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNS0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_20",
+            "inbound_nodes": [[["conv3_2", 0, 0, {}]]]
           },
           {
             "class_name": "Conv2D",
@@ -172,20 +277,41 @@
               "bias_constraint": null
             },
             "name": "conv3_1",
-            "inbound_nodes": [[["conv3_2", 0, 0, {}]]]
+            "inbound_nodes": [[["lambda_20", 0, 0, {}]]]
           },
           {
             "class_name": "UpSampling2D",
             "config": {
-              "name": "up_sampling2d_10",
+              "name": "up_sampling2d_4",
               "trainable": true,
               "dtype": "float32",
               "size": [2, 2],
               "data_format": "channels_last",
               "interpolation": "nearest"
             },
-            "name": "up_sampling2d_10",
+            "name": "up_sampling2d_4",
             "inbound_nodes": [[["conv3_1", 0, 0, {}]]]
+          },
+          {
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_21",
+              "trainable": true,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNS0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_21",
+            "inbound_nodes": [[["up_sampling2d_4", 0, 0, {}]]]
           },
           {
             "class_name": "Conv2D",
@@ -213,7 +339,28 @@
               "bias_constraint": null
             },
             "name": "conv2_2",
-            "inbound_nodes": [[["up_sampling2d_10", 0, 0, {}]]]
+            "inbound_nodes": [[["lambda_21", 0, 0, {}]]]
+          },
+          {
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_22",
+              "trainable": true,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNS0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_22",
+            "inbound_nodes": [[["conv2_2", 0, 0, {}]]]
           },
           {
             "class_name": "Conv2D",
@@ -241,20 +388,41 @@
               "bias_constraint": null
             },
             "name": "conv2_1",
-            "inbound_nodes": [[["conv2_2", 0, 0, {}]]]
+            "inbound_nodes": [[["lambda_22", 0, 0, {}]]]
           },
           {
             "class_name": "UpSampling2D",
             "config": {
-              "name": "up_sampling2d_11",
+              "name": "up_sampling2d_5",
               "trainable": true,
               "dtype": "float32",
               "size": [2, 2],
               "data_format": "channels_last",
               "interpolation": "nearest"
             },
-            "name": "up_sampling2d_11",
+            "name": "up_sampling2d_5",
             "inbound_nodes": [[["conv2_1", 0, 0, {}]]]
+          },
+          {
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_23",
+              "trainable": true,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNS0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_23",
+            "inbound_nodes": [[["up_sampling2d_5", 0, 0, {}]]]
           },
           {
             "class_name": "Conv2D",
@@ -282,7 +450,28 @@
               "bias_constraint": null
             },
             "name": "conv1_2",
-            "inbound_nodes": [[["up_sampling2d_11", 0, 0, {}]]]
+            "inbound_nodes": [[["lambda_23", 0, 0, {}]]]
+          },
+          {
+            "class_name": "Lambda",
+            "config": {
+              "name": "lambda_24",
+              "trainable": true,
+              "dtype": "float32",
+              "function": [
+                "4wIAAAAAAAAAAgAAAAcAAABDAAAAcygAAAB0AGoBfABkAWQBZwJ8AXwBZwJ8AXwBZwJkAWQBZwJn\nBGQCZAONA1MAKQRO6QAAAADaCENPTlNUQU5UKQHaBG1vZGUpAtoCdGbaA3BhZCkC2gF42gdwYWRk\naW5nqQByCAAAAPoePGlweXRob24taW5wdXQtNS0zN2Y5YzFhMGMwY2M+cgUAAAACAAAAcwYAAAAA\nAgQBHAI=\n",
+                [1],
+                null
+              ],
+              "function_type": "lambda",
+              "module": "__main__",
+              "output_shape": null,
+              "output_shape_type": "raw",
+              "output_shape_module": null,
+              "arguments": {}
+            },
+            "name": "lambda_24",
+            "inbound_nodes": [[["conv1_2", 0, 0, {}]]]
           },
           {
             "class_name": "Conv2D",
@@ -310,7 +499,7 @@
               "bias_constraint": null
             },
             "name": "conv1_1",
-            "inbound_nodes": [[["conv1_2", 0, 0, {}]]]
+            "inbound_nodes": [[["lambda_24", 0, 0, {}]]]
           }
         ],
         "input_layers": [["Decoder_input", 0, 0]],

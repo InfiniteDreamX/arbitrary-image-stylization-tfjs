@@ -157,8 +157,8 @@ class Main {
   async loadAdain() {
     if (!this.adain) {
       this.adain = {
-        encoder: await tf.loadLayersModel('test_model/content_encoder(1)/content_encoder/model.json'), //('saved_model_adain_encoder/model.json'),
-        decoder: await tf.loadLayersModel('saved_model_adain_decoder/model.json'),
+        encoder: await tf.loadLayersModel('adain_encoder/content_encoder/model.json'),
+        decoder: await tf.loadLayersModel('adain_decoder/decoder/model.json'),
       };
     }
     return this.adain;
