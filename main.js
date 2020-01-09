@@ -28,7 +28,7 @@ Finalmente, falta agregar el soporte para el reflect padding, o bien por lo meno
 
 */
 
-class Lambda extends tf.layers.Layer {
+class Preprocess extends tf.layers.Layer {
   constructor() {
     super({});
   }
@@ -41,6 +41,21 @@ class Lambda extends tf.layers.Layer {
     const meanPixel = tf.tensor1d([123.68, 116.779, 103.939]);
     const result = tf.mul(tf.scalar(255), input[0]);
     return tf.sub(result, meanPixel);
+  }
+
+  static get className() {
+    return 'Preprocess';
+  }
+}
+tf.serialization.registerClass(Preprocess);
+
+class Lambda extends tf.layers.Layer {
+  constructor() {
+    super({});
+  }
+  call(input, kwargs) {
+    // Ojo, el verdadero input viene en input[0], sino da error de Compilar shaders.
+    return tf.pad(input[0], [[0, 0], [1, 1], [1, 1], [0, 0]]);
   }
 
   static get className() {
@@ -142,7 +157,7 @@ class Main {
   async loadAdain() {
     if (!this.adain) {
       this.adain = {
-        encoder: await tf.loadLayersModel('saved_model_adain_encoder/model.json'),
+        encoder: await tf.loadLayersModel('test_model/content_encoder(1)/content_encoder/model.json'), //('saved_model_adain_encoder/model.json'),
         decoder: await tf.loadLayersModel('saved_model_adain_decoder/model.json'),
       };
     }
