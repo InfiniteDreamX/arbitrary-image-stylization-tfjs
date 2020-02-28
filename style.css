@@ -1,0 +1,50 @@
+#mainContainer {
+  background-color: black;
+  height: 100%;
+  width: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#title {
+  color: white;
+  font-size: xx-large;
+}
+
+#topRow {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.column {
+  padding-top: 10vh;
+  width: 30%;
+}
+
+.imageContainer {
+  background-color: gray;
+  padding: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  object-fit: contain;
+}
+
+#bottom {
+ justify-content: center;
+}
+
+#buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+html {
+  background-color: black;
+}
