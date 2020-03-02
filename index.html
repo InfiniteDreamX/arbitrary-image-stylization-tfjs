@@ -1,162 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!---
-<head>
-    <meta charset="UTF-8">
-    <title>Style Transfer en el navegador</title>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    
-</head>-->
   <head>
-    <meta charset="UTF-8" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <title>Arbitrary Style Transfer in the Browser</title>
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="style.css" />
 
-    <!-- Bootstrap core CSS -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <title>Style Transfer using AdaIN</title>
   </head>
+  <style>
+    .centered {
+      margin: auto;
+      display: block;
+    }
+  </style>
   <body>
-    <!-- 
-    <h2>Contenido</h2>
-    <img id="content-img" src="images/chicago.jpg" accept="image/x-png,image/gif,image/jpeg"/>
-    <input type="file" id="content" />
-    <h2>Estilo</h2>
-    <img id="style-img" src="images/clouds.jpg" accept="image/x-png,image/gif,image/jpeg"/>
-    <input type="file" id="style" />
-    <canvas id="stylized"></canvas>
-    <button id="stylize-button">Estilizar!</button>
-
     <div class="container">
-      <div class="row my-4">
-        <div class="col mx-5 my-4">
-            <img id="content-img" class="centered" src="images/chicago.jpg" height=256></img>
-            <br>
-            <label for="content-img-size">Content image size</label>
-            <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top" 
-            title="A bigger content image results in a more detailed output, but increases the processing time significantly."></i>
-            <input type="range" min="256" max="400" value="256" class="custom-range centered" id="content-img-size" >
-            <br>
-            <select id="content-select" class="centered custom-select">
-              <option value="" disabled>Select content</option>
-              <option value="pic">Take a picture</option>
-              <option value="file">Select from file</option>
-              <option value="stata">stata</option>
-              <option value="diana">diana</option>
-              <option value="golden_gate">golden_gate</option>
-              <option value="beach">beach</option>
-              <option value="chicago" selected="selected">chicago</option>
-              <option value="statue_of_liberty">statue_of_liberty</option>
-            </select>
+      <div class="row" style="justify-content: center;">
+        <p class="h1">Style Transfer using AdaIN</p>
+      </div>
+      <div class="row justify-content-around">
+        <div class="d-flex flex-column justify-content-center">
+          <img
+            id="content-img"
+            class="centered"
+            src="images/chicago.jpg"
+            height="256"
+          />
+          <label for="content" class="btn btn-primary">Select Content Image</label>
+          <input
+            type="file"
+            id="content"
+            style="visibility:hidden;"
+            accept="image/x-png,image/gif,image/jpeg"
+          />
         </div>
-        <div class="col mx-5 my-4">
-            <img id="style-img" class="centered" crossorigin="anonymous" src="images/seaport.jpg" height=256></img>
-            <br>
-            <label for="style-img-size">Style image size</label>
-            <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top" 
-            title='Changing the size of a style image usually affects the texture "seen" by the network.'></i>
-            <input id="style-img-square" type="checkbox" style="vertical-align: middle; float: right;"
-            data-toggle="tooltip" data-placement="top" 
-            title="Force image to square">
-            <input type="range" min="100" max="400" value="256" class="custom-range centered" id="style-img-size">
-            <br>
-            <select id="style-select" class="centered custom-select">
-              <option value="" disabled>Select a style</option>
-              <option value="file">Select from file</option>
-              <option value="random">Random image from wikiart.org</option>
-              <option value="udnie">udnie</option>
-              <option value="stripes">stripes</option>
-              <option value="bricks">bricks</option>
-              <option value="clouds">clouds</option>
-              <option value="towers">towers</option>
-              <option value="sketch">sketch</option>
-              <option value="seaport" selected="selected">seaport</option>
-              <option value="red_circles">red_circles</option>
-              <option value="zigzag">zigzag</option>
-            </select>
+        <div class="d-flex flex-column justify-content-center">
+          <img
+            id="style-img"
+            class="centered"
+            crossorigin="anonymous"
+            src="images/seaport.jpg"
+            height="256"
+          />        
+          <label for="style" class="btn btn-primary">Select Style Image</label>
+          <input
+            type="file"
+            id="style"
+            style="visibility:hidden;"
+            accept="image/x-png,image/gif,image/jpeg"
+          />
+          <input
+            type="range"
+            min="80"
+            max="280"
+            value="256"
+            id="style-img-size"
+            class="custom-range"
+          />
         </div>
       </div>
-      <div class="row my-4">
-        <input type="file" id="content" accept="image/x-png,image/gif,image/jpeg"/>
-        <input type="file" id="style"  accept="image/x-png,image/gif,image/jpeg"/>
-        <div class="col-md-6 offset-md-3">
+      <div class="row">
+        <div class="col">
           <canvas id="stylized" class="centered"></canvas>
-          <br>
-          <label for="stylized-img-ratio">Stylization strength</label>
-          <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top" 
-          title="This parameter affects the stylization strength. The further to the right, the stronger the stylization. This is done via interpolation between the style vectors of the content and style images."></i>
-          <input type="range" min="0" max="100" value="100" class="custom-range centered" id="stylized-img-ratio">
+          
         </div>
       </div>
-      <div class="row my-4">
-        <div class="col-md-5 offset-md-3">
-            <button id="stylize-button" type="button" class="btn btn-primary btn-block">Estilizar</button>
+      <div class="row justify-content-center">
+        <div class="col-5 text-center">
+          <button id="stylize-button" type="button" class="btn btn-primary">
+            Estilizar
+          </button>
         </div>
-        <div class="col-md-1">
-            <button type="button" id="randomize" class="btn btn-light btn-block">
-              <i class="fas fa-random" data-toggle="tooltip" data-placement="top" 
-              title="Randomize parameters"></i>
-            </button>
-        </div>
+      </div>
+      <div class="row my-4 justify-content-center" id="style-transfer-status" hidden>
+        <div class="spinner-border text-primary mx-1" role="status"></div>
+        <span id="status-message"></span>
       </div>
     </div>
-  -->
-    <div id="mainContainer">
-      <div id="title">
-        Style Transfer using AdaIN
-      </div>
-      <div id="topRow">
-        <div class="column">
-          <div class="imageContainer">
-            <img id="content-img" class="image" src="images/chicago.jpg" height="256"/>
-          </div>
-          <input type="range" min="256" max="400" value="256" id="content-img-size" >
-          <input type="file" id="content" accept="image/x-png,image/gif,image/jpeg"/>
-        </div>
-        <div class="column">
-          <div class="imageContainer">
-            <img
-              id="style-img"
-              class="image"
-              crossorigin="anonymous"
-              src="images/seaport.jpg"
-              height="256"
-            />
-          </div>
-          <input type="range" min="80" max="400" value="256" id="style-img-size" >
-          <input type="file" id="style"  accept="image/x-png,image/gif,image/jpeg"/>
-        </div>
-      </div>
-      <div id="bottom">
-        <div id="canvasContainer">
-          <canvas id="stylized"></canvas>
-        </div>
-        <div id="buttonContainer">
-          <button id="stylize-button" type="button">Estilizar</button>
-        </div>
-      </div>
-    </div>
-
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
     <script src="dist/bundle.js"></script>
   </body>
 </html>

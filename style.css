@@ -26,6 +26,7 @@
 
 .imageContainer {
   background-color: gray;
+  border-radius: 15px;
   padding: 5%;
   display: flex;
   justify-content: center;
@@ -34,6 +35,11 @@
 
 .image {
   object-fit: contain;
+}
+
+.selectLabel {
+  color: white;
+  cursor: pointer;
 }
 
 #bottom {

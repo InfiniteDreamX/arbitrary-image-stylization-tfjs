@@ -73,10 +73,16 @@ let decoder;
 const contentInput = document.getElementById('content');
 const styleInput = document.getElementById('style');
 const contentImage = document.getElementById('content-img');
-const contentSize = document.getElementById('content-img-size');
 const styleImage = document.getElementById('style-img');
 const styleSize = document.getElementById('style-img-size');
 const stylized = document.getElementById('stylized');
+const stylizeButton = document.getElementById('stylize-button');
+const styleTransferStatus = document.getElementById('style-transfer-status');
+const statusMessage = document.getElementById('status-message');
+
+function changeStatus(message) {
+  statusMessage.textContent = message;
+}
 
 contentInput.onchange = (evt) => {
   loadImage('content-img', evt);
@@ -86,25 +92,26 @@ styleInput.onchange = (evt) => {
   loadImage('style-img', evt);
 };
 
-contentSize.oninput = (evt) => {
-  contentImage.height = evt.target.value;
-};
-
 styleSize.oninput = (evt) => {
   styleImage.height = evt.target.value;
 };
 
 document.getElementById('stylize-button').onclick = async () => {
+  // Desactivar el boton de estilizado primero
+  stylizeButton.disabled = true;
+  styleTransferStatus.hidden = false;
   if (!encoder || !decoder) {
-    console.log('LLegue aqui');
-    console.log(tf.memory());
+    changeStatus('Loading encoder');
+    // console.log(tf.memory());
     encoder = await tf.loadLayersModel(
       'adain_encoder/content_encoder/model.json'
     );
+    changeStatus('Loading decoder');
     decoder = await tf.loadLayersModel('adain_decoder/decoder/model.json');
-    console.log(tf.memory());
+    // console.log(tf.memory());
   }
   await tf.nextFrame();
+  changeStatus('Generating content representation')
   let bottleneck = await tf.tidy(() => {
     return encoder.predict(
       tf.browser
@@ -114,10 +121,12 @@ document.getElementById('stylize-button').onclick = async () => {
         .expandDims()
     );
   });
+  // console.log(tf.memory());
   await tf.nextFrame();
-  console.log('Generando representacion de estilo');
+  // console.log('Generando representacion de estilo');
   await tf.nextFrame();
   const contentBottleneck = bottleneck;
+  changeStatus('Generating style representation');
   bottleneck = await tf.tidy(() => {
     return encoder.predict(
       tf.browser
@@ -127,27 +136,32 @@ document.getElementById('stylize-button').onclick = async () => {
         .expandDims()
     );
   });
+  // console.log(tf.memory());
   await tf.nextFrame();
   const styleBottleneck = bottleneck;
   await tf.nextFrame();
-  console.log('Haciendo el adain');
+  changeStatus('Transfering style using AdaIN')
   await tf.nextFrame();
-  const resultAdain = adain(contentBottleneck, styleBottleneck);
+  const resultAdain = tf.tidy(() => adain(contentBottleneck, styleBottleneck));
   tf.dispose(contentBottleneck);
   tf.dispose(styleBottleneck);
+  // console.log(tf.memory());
   await tf.nextFrame();
-  console.log(' Decodificando');
+  changeStatus('Decoding the output');
   await tf.nextFrame();
   bottleneck = await tf.tidy(() => {
     return tf.clipByValue(decoder.predict(resultAdain).squeeze(), 0, 1);
   });
-  console.log(tf.memory());
-  console.log('Decodificado, poniendolo en el canvas');
+  // console.log(tf.memory());
+  changeStatus('Drawing the image on the canvas');
   await tf.nextFrame();
   await tf.browser.toPixels(bottleneck, stylized);
-  console.log(tf.memory());
+  // console.log(tf.memory());
   tf.dispose(bottleneck);
   tf.dispose(resultAdain);
-  console.log(tf.memory());
-  console.log('Listo');
+  // console.log(tf.memory());
+  changeStatus('');
+  // Una vez terminado, reactivar el boton
+  stylizeButton.disabled = false;
+  styleTransferStatus.hidden = true;
 };
