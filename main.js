@@ -79,6 +79,7 @@ const stylized = document.getElementById('stylized');
 const stylizeButton = document.getElementById('stylize-button');
 const styleTransferStatus = document.getElementById('style-transfer-status');
 const statusMessage = document.getElementById('status-message');
+const styleStrength = document.getElementById('stylization-strength');
 
 function changeStatus(message) {
   statusMessage.textContent = message;
@@ -111,7 +112,7 @@ document.getElementById('stylize-button').onclick = async () => {
     // console.log(tf.memory());
   }
   await tf.nextFrame();
-  changeStatus('Generating content representation')
+  changeStatus('Generating content representation');
   let bottleneck = await tf.tidy(() => {
     return encoder.predict(
       tf.browser
@@ -139,28 +140,25 @@ document.getElementById('stylize-button').onclick = async () => {
   // console.log(tf.memory());
   await tf.nextFrame();
   const styleBottleneck = bottleneck;
-  await tf.nextFrame();
   changeStatus('Transfering style using AdaIN')
   await tf.nextFrame();
-  const resultAdain = tf.tidy(() => adain(contentBottleneck, styleBottleneck));
+  let resultAdain = tf.tidy(() => adain(contentBottleneck, styleBottleneck));
+  resultAdain = resultAdain.mul(styleStrength.value/100).add(contentBottleneck.mul(1-styleStrength.value/100));
   tf.dispose(contentBottleneck);
   tf.dispose(styleBottleneck);
-  // console.log(tf.memory());
   await tf.nextFrame();
   changeStatus('Decoding the output');
   await tf.nextFrame();
   bottleneck = await tf.tidy(() => {
     return tf.clipByValue(decoder.predict(resultAdain).squeeze(), 0, 1);
   });
-  // console.log(tf.memory());
   changeStatus('Drawing the image on the canvas');
   await tf.nextFrame();
   await tf.browser.toPixels(bottleneck, stylized);
-  // console.log(tf.memory());
   tf.dispose(bottleneck);
   tf.dispose(resultAdain);
-  // console.log(tf.memory());
   changeStatus('');
+
   // Una vez terminado, reactivar el boton
   stylizeButton.disabled = false;
   styleTransferStatus.hidden = true;

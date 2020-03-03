@@ -71,8 +71,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <canvas id="stylized" class="centered"></canvas>
-          
+          <canvas id="stylized" class="centered"></canvas>  
         </div>
       </div>
       <div class="row justify-content-center">
@@ -80,6 +79,14 @@
           <button id="stylize-button" type="button" class="btn btn-primary">
             Estilizar
           </button>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="100"
+            id="stylization-strength"
+            class="custom-range"
+          />
         </div>
       </div>
       <div class="row my-4 justify-content-center" id="style-transfer-status" hidden>
