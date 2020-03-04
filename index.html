@@ -36,7 +36,9 @@
             src="images/chicago.jpg"
             height="256"
           />
-          <label for="content" class="btn btn-primary">Select Content Image</label>
+          <label for="content" class="btn btn-primary"
+            >Select Content Image</label
+          >
           <input
             type="file"
             id="content"
@@ -51,7 +53,7 @@
             crossorigin="anonymous"
             src="images/seaport.jpg"
             height="256"
-          />        
+          />
           <label for="style" class="btn btn-primary">Select Style Image</label>
           <input
             type="file"
@@ -59,6 +61,12 @@
             style="visibility:hidden;"
             accept="image/x-png,image/gif,image/jpeg"
           />
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-5 text-center">
+          Change Style image style
           <input
             type="range"
             min="80"
@@ -67,18 +75,9 @@
             id="style-img-size"
             class="custom-range"
           />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <canvas id="stylized" class="centered"></canvas>  
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-5 text-center">
-          <button id="stylize-button" type="button" class="btn btn-primary">
-            Estilizar
-          </button>
+          <br />
+          <br />
+          Choose Stylization Strength
           <input
             type="range"
             min="0"
@@ -87,9 +86,23 @@
             id="stylization-strength"
             class="custom-range"
           />
+          <br />
+          <br />
+          <button id="stylize-button" type="button" class="btn btn-primary">
+            Estilizar
+          </button>
         </div>
       </div>
-      <div class="row my-4 justify-content-center" id="style-transfer-status" hidden>
+      <div class="row">
+        <div class="col">
+          <canvas id="stylized" class="centered"></canvas>
+        </div>
+      </div>
+      <div
+        class="row my-4 justify-content-center"
+        id="style-transfer-status"
+        hidden
+      >
         <div class="spinner-border text-primary mx-1" role="status"></div>
         <span id="status-message"></span>
       </div>

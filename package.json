@@ -4,7 +4,8 @@
   "author": "Reiichiro Nakano <reiichiro.s.nakano@gmail.com>",
   "dependencies": {
     "@tensorflow/tfjs": "~1.0.0",
-    "babel-polyfill": "~6.26.0"
+    "babel-polyfill": "~6.26.0",
+    "nd4js": "^1.1.0"
   },
   "scripts": {
     "start": "budo main.js:dist/bundle.js --live --host localhost",
@@ -39,6 +40,6 @@
     "eslint": "~4.11.0",
     "eslint-config-google": "~0.9.1",
     "mkdirp": "~0.5.1",
-    "uglify-js": "^3.3.17"
+    "uglify-js": "^3.8.0"
   }
 }

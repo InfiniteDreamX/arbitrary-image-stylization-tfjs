@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 import * as tf from '@tensorflow/tfjs';
 import 'babel-polyfill';
+import coral from './coral';
 tf.ENV.set('WEBGL_PACK', false);
 
 class Preprocess extends tf.layers.Layer {
@@ -112,6 +113,9 @@ document.getElementById('stylize-button').onclick = async () => {
     // console.log(tf.memory());
   }
   await tf.nextFrame();
+  // const styleTensor = tf.browser.fromPixels(styleImage);
+  // const contentTensor = tf.browser.fromPixels(contentImage);
+  // coral(styleTensor, contentTensor);
   changeStatus('Generating content representation');
   let bottleneck = await tf.tidy(() => {
     return encoder.predict(
@@ -140,7 +144,7 @@ document.getElementById('stylize-button').onclick = async () => {
   // console.log(tf.memory());
   await tf.nextFrame();
   const styleBottleneck = bottleneck;
-  changeStatus('Transfering style using AdaIN')
+  changeStatus('Transfering style using AdaIN');
   await tf.nextFrame();
   let resultAdain = tf.tidy(() => adain(contentBottleneck, styleBottleneck));
   resultAdain = resultAdain.mul(styleStrength.value/100).add(contentBottleneck.mul(1-styleStrength.value/100));
